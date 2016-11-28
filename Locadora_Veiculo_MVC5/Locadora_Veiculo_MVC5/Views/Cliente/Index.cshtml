@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Locadora_Veiculo_MVC5.Cliente>
+
+@{
+    ViewBag.Title = "Início";
+}
+
+<h2>Início</h2>
+
+<p>
+    @Html.ActionLink("Incluir", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CpfCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CpfCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCadastro)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Edit", new { id=item.ClienteID }) |
+            @Html.ActionLink("Consulta Detalhada", "Details", new { id=item.ClienteID }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.ClienteID })
+        </td>
+    </tr>
+}
+
+</table>

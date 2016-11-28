@@ -1,0 +1,34 @@
+﻿@model Locadora_Veiculo_MVC5.Modelo
+
+@{
+    ViewBag.Title = "Consulta Detalhada";
+}
+
+<h2>Consulta Detalhada</h2>
+
+<div>
+    <h4>Modelo</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeModelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeModelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca.NomeMarca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca.NomeMarca)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Alterar", "Edit", new { id = Model.ModeloID }) |
+    @Html.ActionLink("Volta para Lista", "Index")
+</p>

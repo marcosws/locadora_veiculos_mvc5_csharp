@@ -1,0 +1,56 @@
+﻿@model Locadora_Veiculo_MVC5.Cliente
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir</h2>
+
+<h3>Você dejeja excluir este cliente?</h3>
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CpfCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CpfCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Volta para lista", "Index")
+        </div>
+    }
+</div>

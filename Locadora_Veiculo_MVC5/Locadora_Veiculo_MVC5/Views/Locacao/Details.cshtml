@@ -1,0 +1,75 @@
+﻿@model Locadora_Veiculo_MVC5.Locacao
+
+@{
+    ViewBag.Title = "Consulta Detalhada";
+}
+
+<h2>Consulta Detalhada</h2>
+
+<div>
+    <h4>Locacao</h4>
+	<hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.NomeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.NomeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.EmailCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.EmailCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.CpfCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.CpfCliente)
+        </dd>
+
+        <dt>
+          @Html.DisplayNameFor(model => model.Cliente.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.DataCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataLocacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataLocacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDevolucao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDevolucao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Automovel.PlacaAutomovel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Automovel.PlacaAutomovel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Alterar", "Edit", new { id = Model.LocacaoID }) |
+    @Html.ActionLink("Volta para Lista", "Index")
+</p>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocadoraModelStoreContainer" CdmEntityContainer="LocadoraEntities">
+    <EntitySetMapping Name="Automovel">
+      <EntityTypeMapping TypeName="LocadoraModel.Automovel">
+        <MappingFragment StoreEntitySet="Automovel">
+          <ScalarProperty Name="AutomovelID" ColumnName="AutomovelID" />
+          <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+          <ScalarProperty Name="PlacaAutomovel" ColumnName="PlacaAutomovel" />
+          <ScalarProperty Name="AnoAutomovel" ColumnName="AnoAutomovel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="LocadoraModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+          <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+          <ScalarProperty Name="CpfCliente" ColumnName="CpfCliente" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locacao">
+      <EntityTypeMapping TypeName="LocadoraModel.Locacao">
+        <MappingFragment StoreEntitySet="Locacao">
+          <ScalarProperty Name="LocacaoID" ColumnName="LocacaoID" />
+          <ScalarProperty Name="AutomovelID" ColumnName="AutomovelID" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="DataLocacao" ColumnName="DataLocacao" />
+          <ScalarProperty Name="DataDevolucao" ColumnName="DataDevolucao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marca">
+      <EntityTypeMapping TypeName="LocadoraModel.Marca">
+        <MappingFragment StoreEntitySet="Marca">
+          <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+          <ScalarProperty Name="NomeMarca" ColumnName="NomeMarca" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modelo">
+      <EntityTypeMapping TypeName="LocadoraModel.Modelo">
+        <MappingFragment StoreEntitySet="Modelo">
+          <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+          <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+          <ScalarProperty Name="NomeModelo" ColumnName="NomeModelo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

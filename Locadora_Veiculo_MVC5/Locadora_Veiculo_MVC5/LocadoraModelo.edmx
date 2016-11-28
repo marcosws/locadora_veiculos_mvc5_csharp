@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LocadoraModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="LocadoraModelStoreContainer">
+          <EntitySet Name="Automovel" EntityType="LocadoraModel.Store.Automovel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cliente" EntityType="LocadoraModel.Store.Cliente" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Locacao" EntityType="LocadoraModel.Store.Locacao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Marca" EntityType="LocadoraModel.Store.Marca" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Modelo" EntityType="LocadoraModel.Store.Modelo" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Automovel" Association="LocadoraModel.Store.FK_Automovel">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locacao_Auto" Association="LocadoraModel.Store.FK_Locacao_Auto">
+            <End Role="Automovel" EntitySet="Automovel" />
+            <End Role="Locacao" EntitySet="Locacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locacao_Cliente" Association="LocadoraModel.Store.FK_Locacao_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Locacao" EntitySet="Locacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo" Association="LocadoraModel.Store.FK_Modelo">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Automovel">
+          <Key>
+            <PropertyRef Name="AutomovelID" />
+          </Key>
+          <Property Name="AutomovelID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ModeloID" Type="int" />
+          <Property Name="PlacaAutomovel" Type="nvarchar" MaxLength="8" />
+          <Property Name="AnoAutomovel" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NomeCliente" Type="nvarchar" MaxLength="150" />
+          <Property Name="EmailCliente" Type="nvarchar" MaxLength="100" />
+          <Property Name="CpfCliente" Type="nvarchar" MaxLength="11" />
+          <Property Name="DataCadastro" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Locacao">
+          <Key>
+            <PropertyRef Name="LocacaoID" />
+          </Key>
+          <Property Name="LocacaoID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AutomovelID" Type="int" />
+          <Property Name="ClienteID" Type="int" />
+          <Property Name="DataLocacao" Type="smalldatetime" />
+          <Property Name="DataDevolucao" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NomeMarca" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="ModeloID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MarcaID" Type="int" />
+          <Property Name="NomeModelo" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <Association Name="FK_Automovel">
+          <End Role="Modelo" Type="LocadoraModel.Store.Modelo" Multiplicity="0..1" />
+          <End Role="Automovel" Type="LocadoraModel.Store.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locacao_Auto">
+          <End Role="Automovel" Type="LocadoraModel.Store.Automovel" Multiplicity="0..1" />
+          <End Role="Locacao" Type="LocadoraModel.Store.Locacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automovel">
+              <PropertyRef Name="AutomovelID" />
+            </Principal>
+            <Dependent Role="Locacao">
+              <PropertyRef Name="AutomovelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locacao_Cliente">
+          <End Role="Cliente" Type="LocadoraModel.Store.Cliente" Multiplicity="0..1" />
+          <End Role="Locacao" Type="LocadoraModel.Store.Locacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Locacao">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo">
+          <End Role="Marca" Type="LocadoraModel.Store.Marca" Multiplicity="0..1" />
+          <End Role="Modelo" Type="LocadoraModel.Store.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocadoraModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LocadoraEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Automovel" EntityType="LocadoraModel.Automovel" />
+          <EntitySet Name="Cliente" EntityType="LocadoraModel.Cliente" />
+          <EntitySet Name="Locacao" EntityType="LocadoraModel.Locacao" />
+          <EntitySet Name="Marca" EntityType="LocadoraModel.Marca" />
+          <EntitySet Name="Modelo" EntityType="LocadoraModel.Modelo" />
+          <AssociationSet Name="FK_Automovel" Association="LocadoraModel.FK_Automovel">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Automovel" EntitySet="Automovel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locacao_Auto" Association="LocadoraModel.FK_Locacao_Auto">
+            <End Role="Automovel" EntitySet="Automovel" />
+            <End Role="Locacao" EntitySet="Locacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locacao_Cliente" Association="LocadoraModel.FK_Locacao_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Locacao" EntitySet="Locacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo" Association="LocadoraModel.FK_Modelo">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Automovel">
+          <Key>
+            <PropertyRef Name="AutomovelID" />
+          </Key>
+          <Property Name="AutomovelID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ModeloID" Type="Int32" />
+          <Property Name="PlacaAutomovel" Type="String" MaxLength="8" Unicode="true" FixedLength="false" />
+          <Property Name="AnoAutomovel" Type="String" MaxLength="4" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Modelo" Relationship="LocadoraModel.FK_Automovel" FromRole="Automovel" ToRole="Modelo" />
+          <NavigationProperty Name="Locacao" Relationship="LocadoraModel.FK_Locacao_Auto" FromRole="Automovel" ToRole="Locacao" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeCliente" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="EmailCliente" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="CpfCliente" Type="String" MaxLength="11" Unicode="true" FixedLength="false" />
+          <Property Name="DataCadastro" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Locacao" Relationship="LocadoraModel.FK_Locacao_Cliente" FromRole="Cliente" ToRole="Locacao" />
+        </EntityType>
+        <EntityType Name="Locacao">
+          <Key>
+            <PropertyRef Name="LocacaoID" />
+          </Key>
+          <Property Name="LocacaoID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AutomovelID" Type="Int32" />
+          <Property Name="ClienteID" Type="Int32" />
+          <Property Name="DataLocacao" Type="DateTime" Precision="0" />
+          <Property Name="DataDevolucao" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Automovel" Relationship="LocadoraModel.FK_Locacao_Auto" FromRole="Locacao" ToRole="Automovel" />
+          <NavigationProperty Name="Cliente" Relationship="LocadoraModel.FK_Locacao_Cliente" FromRole="Locacao" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeMarca" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Modelo" Relationship="LocadoraModel.FK_Modelo" FromRole="Marca" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="ModeloID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="MarcaID" Type="Int32" />
+          <Property Name="NomeModelo" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Automovel" Relationship="LocadoraModel.FK_Automovel" FromRole="Modelo" ToRole="Automovel" />
+          <NavigationProperty Name="Marca" Relationship="LocadoraModel.FK_Modelo" FromRole="Modelo" ToRole="Marca" />
+        </EntityType>
+        <Association Name="FK_Automovel">
+          <End Role="Modelo" Type="LocadoraModel.Modelo" Multiplicity="0..1" />
+          <End Role="Automovel" Type="LocadoraModel.Automovel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Automovel">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locacao_Auto">
+          <End Role="Automovel" Type="LocadoraModel.Automovel" Multiplicity="0..1" />
+          <End Role="Locacao" Type="LocadoraModel.Locacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automovel">
+              <PropertyRef Name="AutomovelID" />
+            </Principal>
+            <Dependent Role="Locacao">
+              <PropertyRef Name="AutomovelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locacao_Cliente">
+          <End Role="Cliente" Type="LocadoraModel.Cliente" Multiplicity="0..1" />
+          <End Role="Locacao" Type="LocadoraModel.Locacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Locacao">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo">
+          <End Role="Marca" Type="LocadoraModel.Marca" Multiplicity="0..1" />
+          <End Role="Modelo" Type="LocadoraModel.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocadoraModelStoreContainer" CdmEntityContainer="LocadoraEntities">
+          <EntitySetMapping Name="Automovel">
+            <EntityTypeMapping TypeName="LocadoraModel.Automovel">
+              <MappingFragment StoreEntitySet="Automovel">
+                <ScalarProperty Name="AutomovelID" ColumnName="AutomovelID" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="PlacaAutomovel" ColumnName="PlacaAutomovel" />
+                <ScalarProperty Name="AnoAutomovel" ColumnName="AnoAutomovel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="LocadoraModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+                <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+                <ScalarProperty Name="CpfCliente" ColumnName="CpfCliente" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locacao">
+            <EntityTypeMapping TypeName="LocadoraModel.Locacao">
+              <MappingFragment StoreEntitySet="Locacao">
+                <ScalarProperty Name="LocacaoID" ColumnName="LocacaoID" />
+                <ScalarProperty Name="AutomovelID" ColumnName="AutomovelID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="DataLocacao" ColumnName="DataLocacao" />
+                <ScalarProperty Name="DataDevolucao" ColumnName="DataDevolucao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="LocadoraModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="NomeMarca" ColumnName="NomeMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modelo">
+            <EntityTypeMapping TypeName="LocadoraModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="NomeModelo" ColumnName="NomeModelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

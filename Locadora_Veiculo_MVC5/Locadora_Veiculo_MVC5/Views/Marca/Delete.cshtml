@@ -1,0 +1,32 @@
+﻿@model Locadora_Veiculo_MVC5.Marca
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir</h2>
+
+<h3>Você deseja Excluir esta marca?</h3>
+<div>
+    <h4>Marca</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeMarca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeMarca)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Volta para Lista", "Index")
+        </div>
+    }
+</div>

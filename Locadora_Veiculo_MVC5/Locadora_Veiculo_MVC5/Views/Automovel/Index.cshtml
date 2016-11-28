@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Locadora_Veiculo_MVC5.Automovel>
+
+@{
+    ViewBag.Title = "Início";
+}
+
+<h2>Início</h2>
+
+<p>
+    @Html.ActionLink("Incluir", "Create")
+</p>
+<table class="table">
+    <tr>
+         <th>
+             @Html.DisplayNameFor(model => model.Modelo.NomeModelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlacaAutomovel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnoAutomovel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo.NomeModelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnoAutomovel)
+        </td>
+        <td>
+           @Html.DisplayFor(modelItem => item.PlacaAutomovel)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Edit", new { id=item.AutomovelID }) |
+            @Html.ActionLink("Consulta Detalhada", "Details", new { id=item.AutomovelID }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.AutomovelID })
+        </td>
+    </tr>
+}
+
+</table>
